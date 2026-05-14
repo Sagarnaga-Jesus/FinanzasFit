@@ -16,7 +16,7 @@ def LoginView(page: ft.Page, auth_controller):
     
     def login_click(e):
         if not correo.value or not contra.value:
-            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos")))
+            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos"), bgcolor=ft.Colors.RED))
             return
         
     
@@ -26,10 +26,10 @@ def LoginView(page: ft.Page, auth_controller):
             page.user_data = user
             page.go("/inicio")
         else:
-            page.show_dialog(ft.SnackBar(ft.Text(msg)))
+            page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.RED))
             
     def olvidado():
-        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado su contraseña al correo")))
+        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado su contraseña al correo"), bgcolor=ft.Colors.GREEN))
     
     
     iniciar= ft.ElevatedButton("Iniciar sesión", on_click=login_click, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))

@@ -39,7 +39,7 @@ def RegistroView(page: ft.Page, auth_controller):
 
     def registra(e):
         if not correo.value and not contra.value and not nombre.value:
-            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos")))
+            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos"), bgcolor=ft.Colors.RED))
             return
         
         nombre_foto = "Default.webp"
@@ -64,9 +64,9 @@ def RegistroView(page: ft.Page, auth_controller):
         
         if user:
             page.go("/")
-            page.show_dialog(ft.SnackBar(ft.Text(msg)))
+            page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.GREEN))
         else:
-            page.show_dialog(ft.SnackBar(ft.Text(msg)))
+            page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.RED))
     
     registrar =( ft.ElevatedButton("Registrase",color=ft.Colors.BLUE, on_click=registra))
     def regresar():
