@@ -21,10 +21,7 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
   - Especialidad: Programacion
   - Instituto: CETis61
   ### Fotografia
-  - ![Luis]()
-)
-)  
-
+  - ![Luis](assets/luis.png)
 
 - **Sagarnaga Macias Jesus Antonio**  
   - Correo Electronico:23308060610320@cetis61.edu.mx
@@ -32,6 +29,5 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
   - Especialida: Programacion
   - Instituto: CETis61
   ### Fotografia
-  ![Jesus](assets\sagarnaga.png)
-)
+  ![Jesus](assets/sagarnaga.png)
 
