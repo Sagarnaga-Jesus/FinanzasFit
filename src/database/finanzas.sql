@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `dinero` (
   CONSTRAINT `dinero` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ges_finanzas.dinero: ~0 rows (aproximadamente)
+DELETE FROM `dinero`;
 
 -- Volcando estructura para tabla ges_finanzas.gastos
 CREATE TABLE IF NOT EXISTS `gastos` (
@@ -47,7 +48,8 @@ CREATE TABLE IF NOT EXISTS `gastos` (
   CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ges_finanzas.gastos: ~0 rows (aproximadamente)
+DELETE FROM `gastos`;
 
 -- Volcando estructura para tabla ges_finanzas.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -61,7 +63,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ges_finanzas.usuario: ~0 rows (aproximadamente)
+DELETE FROM `usuario`;
+INSERT INTO `usuario` (`id_usuario`, `email`, `password`, `nombre`, `fecha_registro`, `ultimo_registro`, `foto`) VALUES
+	(1, 'admin@gmail.com', '$2b$12$0kVL5yxk7kJ1M6QTLjxTleTJvDQm.YgxC6zTfpHXwTI9v5LyCWVbK', 'Admin', '2026-05-14 00:00:00', '2026-05-14 10:45:27', 'Default.webp');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
