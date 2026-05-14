@@ -21,12 +21,12 @@ USE `ges_finanzas`;
 
 -- Volcando estructura para tabla ges_finanzas.dinero
 CREATE TABLE IF NOT EXISTS `dinero` (
-  `id_dinero` int(11) NOT NULL AUTO_INCREMENT,
-  `presupuesto` float NOT NULL DEFAULT 0,
-  `id_usuario` int(11) NOT NULL,
-  PRIMARY KEY (`id_dinero`),
-  KEY `id_usuario` (`id_usuario`),
-  CONSTRAINT `dinero` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    `id_dinero` int(11) NOT NULL AUTO_INCREMENT,
+    `presupuesto` float NOT NULL DEFAULT 0,
+    `id_usuario` int(11) NOT NULL,
+    PRIMARY KEY (`id_dinero`),
+    KEY `id_usuario` (`id_usuario`),
+    CONSTRAINT `dinero` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla ges_finanzas.dinero: ~0 rows (aproximadamente)
@@ -34,18 +34,18 @@ DELETE FROM `dinero`;
 
 -- Volcando estructura para tabla ges_finanzas.gastos
 CREATE TABLE IF NOT EXISTS `gastos` (
-  `id_gasto` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
-  `tipo_gasto` varchar(50) DEFAULT NULL,
-  `gasto_aprox` float DEFAULT NULL,
-  `dinero_usar` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_gasto`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `dinero` (`dinero_usar`) USING BTREE,
-  CONSTRAINT `dinero_gasto` FOREIGN KEY (`dinero_usar`) REFERENCES `dinero` (`id_dinero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    `id_gasto` int(11) NOT NULL AUTO_INCREMENT,
+    `titulo` varchar(50) DEFAULT NULL,
+    `descripcion` varchar(50) DEFAULT NULL,
+    `tipo_gasto` varchar(50) DEFAULT NULL,
+    `gasto_aprox` float DEFAULT NULL,
+    `dinero_usar` int(11) DEFAULT NULL,
+    `id_usuario` int(11) DEFAULT NULL,
+    PRIMARY KEY (`id_gasto`),
+    KEY `id_usuario` (`id_usuario`),
+    KEY `dinero` (`dinero_usar`) USING BTREE,
+    CONSTRAINT `dinero_gasto` FOREIGN KEY (`dinero_usar`) REFERENCES `dinero` (`id_dinero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla ges_finanzas.gastos: ~0 rows (aproximadamente)
@@ -53,14 +53,14 @@ DELETE FROM `gastos`;
 
 -- Volcando estructura para tabla ges_finanzas.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL DEFAULT '',
-  `password` varchar(300) NOT NULL DEFAULT '',
-  `nombre` varchar(300) NOT NULL DEFAULT '',
-  `fecha_registro` datetime DEFAULT NULL,
-  `ultimo_registro` datetime DEFAULT NULL,
-  `foto` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id_usuario`)
+    `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(100) NOT NULL DEFAULT '',
+    `password` varchar(300) NOT NULL DEFAULT '',
+    `nombre` varchar(300) NOT NULL DEFAULT '',
+    `fecha_registro` datetime DEFAULT NULL,
+    `ultimo_registro` datetime DEFAULT NULL,
+    `foto` varchar(200) DEFAULT NULL,
+    PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla ges_finanzas.usuario: ~0 rows (aproximadamente)
