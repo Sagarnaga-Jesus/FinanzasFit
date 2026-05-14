@@ -33,7 +33,7 @@ def LoginView(page: ft.Page, auth_controller):
     
     
     iniciar= ft.ElevatedButton("Iniciar sesión", on_click=login_click, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
-    registrarse = ft.ElevatedButton("Crear una nueva cuenta", on_click=lambda _: page.go("/registro"), width=350, bgcolor="green", color = "black", icon=(ft.Icon(ft.Icons.PASSWORD, color=ft.Colors.WHITE, size=25)))
+    registrarse = ft.ElevatedButton("Crear una nueva cuenta", on_click=lambda _: page.go("/registro"), width=350, bgcolor="green", color = "black", icon=(ft.Icon(ft.Icons.ACCOUNT_BOX, color=ft.Colors.WHITE, size=25)))
     olvidada =( ft.TextButton("¿Olvidaste la contraseña?", on_click=olvidado))
     
     
@@ -50,7 +50,7 @@ def LoginView(page: ft.Page, auth_controller):
             ft.Column(
                 [
                     ft.Icon(ft.Icons.LOCK_PERSON, size=50, color=ft.Colors.GREEN),
-                    ft.Text("Acceso al sistema", size=24, weight="bold"),
+                    ft.Text("Acceso al sistema de Finanzas Fit", size=24, weight="bold"),
                     correo,
                     contra,
                     iniciar,
