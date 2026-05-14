@@ -21,7 +21,7 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
   - Especialidad: Programacion
   - Instituto: CETis61
   ### Fotografia
-  - ![Luis](<img width="299" height="396" alt="luis" src="https://github.com/user-attachments/assets/bd3f4b7d-9c80-49fd-94c9-7f806013b3ec" />)
+  - ![Luis]()
 )
 )  
 
@@ -32,6 +32,6 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
   - Especialida: Programacion
   - Instituto: CETis61
   ### Fotografia
-  ![Jesus](<img width="299" height="396" alt="sagarnaga" src="https://github.com/user-attachments/assets/32c37797-aabe-47bd-9bd9-7c7cdf910f7d"/>)
+  ![Jesus](assets\sagarnaga.png)
 )
 
