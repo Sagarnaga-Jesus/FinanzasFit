@@ -21,7 +21,7 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
   - Especialidad: Programacion
   - Instituto: CETis61
   ### Fotografia
-  - ![Luis](<img width="299" height="396" alt="luis" src="https://github.com/user-attachments/assets/a37b7053-2c3b-433f-a14f-031984cc0c1f" />
+  - ![Luis](<img width="299" height="396" alt="luis" src="https://github.com/user-attachments/assets/a37b7053-2c3b-433f-a14f-031984cc0c1f" />)
 )  
 
 
