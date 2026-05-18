@@ -1,4 +1,5 @@
 import flet as ft
+from datetime import datetime, timedelta
 import requests, random, smtplib
 from email.mime.text import MIMEText
 
@@ -18,6 +19,7 @@ def OlvidadoView(page, auth_controller):
         
         if existe:
             codigo = random.randint(100000,999999)
+            expira = datetime
             page.codigo = codigo
             remitente = "23308060610335@cetis61.edu.mx"
             password = "kraf vtjr arsu gcxz"
