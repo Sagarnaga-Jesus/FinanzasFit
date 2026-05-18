@@ -20,7 +20,6 @@ def OlvidadoView(page, auth_controller):
         
         if existe:
             codigo = random.randint(100000,999999)
-            expira = datetime
             page.codigo = codigo
             remitente = "23308060610335@cetis61.edu.mx"
             password = "kraf vtjr arsu gcxz"
@@ -55,13 +54,21 @@ def OlvidadoView(page, auth_controller):
     
     def verifica(e):
         codigo = getattr(page, "codigo")
-        if txt_codigo.value == str(codigo):
+        expira = datetime.now()+timedelta(minutes=1)
+        if datetime.now()>expira:
+            codigo = ""
+            expira = ""
+            txt_codigo.visible = False
+            verificar.visible = False
+            txt1.visible = False
+            page.show_dialog(ft.SnackBar(ft.Text("Codigo expirado"),bgcolor="red"))
+        elif txt_codigo.value == str(codigo):
             nueva.visible=True
             cambia_nueva.visible = True
             txt.visible = True
             page.update()
         else:
-            page.show_dialog(ft.SnackBar(ft.Text("Codigo incorrecto"),bgcolor="red"))
+            page.show_dialog(ft.SnackBar(ft.Text("Codigo incorecto"),bgcolor="red"))
     
     def cambiar():
         listo,msg = auth_controller.cambiar(nueva.value,correo.value)
