@@ -2,6 +2,7 @@ import flet as ft
 from views.LoginView import LoginView
 from views.RegistroView import RegistroView
 from views.InicioView import InicioView
+from views.OlvidadoView import OlvidadoView
 from controllers.UserController import AuthController
 
 
@@ -21,6 +22,8 @@ def start(page: ft.Page):
             page.views.append(LoginView(page,auth))
         elif page.route == "/registro":
             page.views.append(RegistroView(page,auth))
+        elif page.route == "/olvidado":
+            page.views.append(OlvidadoView(page, auth))
         elif page.route == "/inicio":
             page.views.append(InicioView(page))
         page.update()

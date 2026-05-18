@@ -1,6 +1,7 @@
 import flet as ft
 from datetime import datetime
-import requests
+import requests, random, smtplib
+from email.mime.text import MIMEText
 
 
 def LoginView(page: ft.Page, auth_controller):
@@ -27,14 +28,11 @@ def LoginView(page: ft.Page, auth_controller):
             page.go("/inicio")
         else:
             page.show_dialog(ft.SnackBar(ft.Text(msg)))
-            
-    def olvidado():
-        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado su contraseña al correo")))
-    
     
     iniciar= ft.ElevatedButton("Iniciar sesión", on_click=login_click, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
     registrarse = ft.ElevatedButton("Crear una nueva cuenta", on_click=lambda _: page.go("/registro"), width=350, bgcolor="green", color = "black", icon=(ft.Icon(ft.Icons.PASSWORD, color=ft.Colors.WHITE, size=25)))
-    olvidada =( ft.TextButton("¿Olvidaste la contraseña?", on_click=olvidado))
+    olvidada = ft.ElevatedButton("¿Olvidaste la contraseña?", on_click=lambda _: page.go("/olvidado"))
+    
     
     
     return ft.View(

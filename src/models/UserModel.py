@@ -91,3 +91,51 @@ class UsuarioModel:
             if cursor: cursor.close()
             if conn: conn.close()
             
+    def existe_correo(self,correo):
+        conn = None
+        cursor = None
+        
+        try:
+            conn= self.db.get_connection()
+            cursor=conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM usuario WHERE email=%s",(correo,))
+            user = cursor.fetchone()
+            conn.close()
+            if user:
+                return True
+            else:
+                return False
+            
+        except Exception as err:
+            print(f"Error: {err}")
+            return False
+        finally:
+            if cursor: cursor.close()
+            if conn: conn.close()
+    
+    def cambiar_password(self,password,correo):
+        conn = None
+        cursor = None
+        
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(
+            password.encode('utf-8'),
+            salt
+        )
+        
+        try:
+            conn= self.db.get_connection()
+            cursor=conn.cursor(dictionary=True)
+            cursor.execute("UPDATE usuario SET password = %s WHERE email = %s", (hashed, correo))
+            
+            conn.commit()
+            return True
+        except Exception as err:
+            print(f"Error: {err}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+
+            if conn:
+                conn.close()
