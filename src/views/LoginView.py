@@ -1,7 +1,6 @@
 import flet as ft
 from datetime import datetime
-import requests, random, smtplib
-from email.mime.text import MIMEText
+import requests
 
 
 def LoginView(page: ft.Page, auth_controller):
@@ -17,7 +16,7 @@ def LoginView(page: ft.Page, auth_controller):
     
     def login_click(e):
         if not correo.value or not contra.value:
-            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos")))
+            page.show_dialog(ft.SnackBar(ft.Text("Por favor, complete todos los campos"), bgcolor=ft.Colors.RED))
             return
         
     
@@ -27,13 +26,15 @@ def LoginView(page: ft.Page, auth_controller):
             page.user_data = user
             page.go("/inicio")
         else:
-            page.show_dialog(ft.SnackBar(ft.Text(msg)))
+            page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.RED))
+            
+    def olvidado():
+        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado su contraseña al correo"), bgcolor=ft.Colors.GREEN))
+    
     
     iniciar= ft.ElevatedButton("Iniciar sesión", on_click=login_click, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
-    registrarse = ft.ElevatedButton("Crear una nueva cuenta", on_click=lambda _: page.go("/registro"), width=350, bgcolor="green", color = "black", icon=(ft.Icon(ft.Icons.PASSWORD, color=ft.Colors.WHITE, size=25)))
-    olvidada = ft.ElevatedButton("¿Olvidaste la contraseña?", on_click=lambda _: page.go("/olvidado"))
-    
-    
+    registrarse = ft.ElevatedButton("Crear una nueva cuenta", on_click=lambda _: page.go("/registro"), width=350, bgcolor="green", color = "black", icon=(ft.Icon(ft.Icons.ACCOUNT_BOX, color=ft.Colors.WHITE, size=25)))
+    olvidada =( ft.TextButton("¿Olvidaste la contraseña?", on_click=olvidado))
     
     return ft.View(
         route="/",
@@ -48,7 +49,7 @@ def LoginView(page: ft.Page, auth_controller):
             ft.Column(
                 [
                     ft.Icon(ft.Icons.LOCK_PERSON, size=50, color=ft.Colors.GREEN),
-                    ft.Text("Acceso al sistema", size=24, weight="bold"),
+                    ft.Text("Acceso al sistema de Finanzas Fit", size=24, weight="bold"),
                     correo,
                     contra,
                     iniciar,

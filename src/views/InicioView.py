@@ -1,6 +1,10 @@
 import flet as ft
 
 def InicioView(page):
+    
+    def cerrar_sesion():
+        page.go("/")
+        
     return ft.View(
         route="/inicio",
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
@@ -8,7 +12,10 @@ def InicioView(page):
         appbar=ft.AppBar(
             title=ft.Text("Inicio"),
             bgcolor=ft.Colors.BLUE_GREY_900,
-            color="white"
+            color="white",
+            actions=[
+                    ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=cerrar_sesion,tooltip="Cerrar sesión")
+                ],
         ),
         controls=[
             ft.Column(
