@@ -2,6 +2,7 @@ import flet as ft
 from datetime import datetime
 import shutil
 import os
+logo = ft.Image(src="assets/FinanzasFit.png", width = 100, height = 100, border_radius = 100)
 
 def RegistroView(page: ft.Page, auth_controller):
     
@@ -86,6 +87,7 @@ def RegistroView(page: ft.Page, auth_controller):
         controls=[
             ft.Column(
                 [
+                    logo,
                     ft.Icon(ft.Icons.ACCOUNT_BOX, size=50, color=ft.Colors.BLUE),
                     ft.Text("Registro de usuario", size=30, weight="bold"),
                     nombre,

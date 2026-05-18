@@ -39,7 +39,7 @@ def OlvidadoView(page, auth_controller):
                 mensaje.as_string()
             )
             servidor.quit()
-            page.show_dialog(ft.SnackBar(ft.Text("Codigo enviado con existo"),bgcolor="green"))
+            page.show_dialog(ft.SnackBar(ft.Text("Codigo enviado con exito"),bgcolor="green"))
             txt_codigo.visible = True
             verificar.visible = True
             txt1.visible = True
@@ -94,6 +94,7 @@ def OlvidadoView(page, auth_controller):
                 [
                     ft.Text("Cambio de contraseña", size=24, weight="bold"),
                     ft.Text("Nota: ingresa el correo que tienes registrado en la aplicacion", size=14, weight="bold", color="red"),
+                    ft.Text("Nota2: el mensaje llega en spam", size=14, weight="bold", color="red"),
                     correo,
                     enviar,
                     txt1,

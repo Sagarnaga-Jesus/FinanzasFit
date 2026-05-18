@@ -1,5 +1,7 @@
 import flet as ft
 
+logo = ft.Image(src="assets/FinanzasFit.png", width = 150, height = 150)
+
 def InicioView(page):
     
     def cerrar_sesion():
@@ -21,9 +23,10 @@ def InicioView(page):
             ft.Column(
                 [
                     ft.Icon(ft.Icons.HOME, size=50, color=ft.Colors.GREEN),
+                    logo,
                     ft.Text(f"Bienvenido, {page.user_data['nombre']}!", size=24, weight="bold"),
                     ft.Text("Bienvenido a Finanzas Fit", size=24, weight="bold"),
-                    ft.Text("Tu compañero para una vida financiera saludable", size=16)
+                    ft.Text("Tu compañero para una vida financiera mas comoda y segura", size=16)
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=10

@@ -1,6 +1,7 @@
 import flet as ft
 from datetime import datetime
 import requests
+#logo = ft.Image(src="assets/FinanzasFit.png", width = 100, height = 100, border_radius = 100)
 
 def LoginView(page: ft.Page, auth_controller):
     
@@ -26,7 +27,7 @@ def LoginView(page: ft.Page, auth_controller):
             page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.RED))
             
     def olvidado():
-        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado su contraseña al correo"), bgcolor=ft.Colors.GREEN))
+        page.show_dialog(ft.SnackBar(ft.Text("Se a enviado informacion a su correo"), bgcolor=ft.Colors.GREEN))
     
     
     iniciar= ft.ElevatedButton("Iniciar sesión", on_click=login_click, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
@@ -46,6 +47,7 @@ def LoginView(page: ft.Page, auth_controller):
         controls=[
             ft.Column(
                 [
+#                    logo,
                     ft.Icon(ft.Icons.LOCK_PERSON, size=50, color=ft.Colors.GREEN),
                     ft.Text("Acceso al sistema de Finanzas Fit", size=24, weight="bold"),
                     correo,
