@@ -72,6 +72,11 @@ def OlvidadoView(page, auth_controller):
     def ver_contra():
         nueva.password = not nueva.password
         nueva.update()
+        
+    def regresar():
+        page.go("/")
+        
+    reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar))
     
     verificar = ft.ElevatedButton("Verificar",visible=False,on_click=verifica)
     cambia_nueva = ft.ElevatedButton("Cambiar contraseña",visible=False,on_click=cambiar)
@@ -97,6 +102,7 @@ def OlvidadoView(page, auth_controller):
                     ft.Text("Nota2: el mensaje llega en spam", size=14, weight="bold", color="red"),
                     correo,
                     enviar,
+                    reversa,
                     txt1,
                     txt_codigo,
                     verificar,
