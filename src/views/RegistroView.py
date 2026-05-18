@@ -33,7 +33,10 @@ def RegistroView(page: ft.Page, auth_controller):
 
     boton = ft.ElevatedButton(
         "Seleccionar archivo",
-        on_click=seleccionar_archivo
+        on_click=seleccionar_archivo,
+        color=ft.Colors.GREEN,
+        height=40,
+        width=200,
     )
     
     
@@ -69,11 +72,11 @@ def RegistroView(page: ft.Page, auth_controller):
         else:
             page.show_dialog(ft.SnackBar(ft.Text(msg), bgcolor=ft.Colors.RED))
     
-    registrar =( ft.ElevatedButton("Registrase",color=ft.Colors.BLUE, on_click=registra))
+    registrar =( ft.ElevatedButton("Registrase",color=ft.Colors.BLUE, on_click=registra, height=40, width=200))
     def regresar():
         page.go("/")
         
-    reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar))
+    reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar, height=40, width=200))
     
     return ft.View(
         route="/registro",

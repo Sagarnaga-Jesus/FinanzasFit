@@ -9,8 +9,8 @@ def LoginView(page: ft.Page, auth_controller):
         contra.password = not contra.password
         contra.update()
         
-    correo=(ft.TextField(label="Correo",autofocus=True, icon=ft.Icons.PERSON ))
-    contra=(ft.TextField(label="Contraseña",suffix=ft.IconButton(icon=ft.Icons.VISIBILITY, on_click=ver_contra) ,password=True, autofocus=True, icon=ft.Icons.PASSWORD))
+    correo=(ft.TextField(label="Correo",autofocus=True, icon=ft.Icons.PERSON, width=350))
+    contra=(ft.TextField(label="Contraseña",suffix=ft.IconButton(icon=ft.Icons.VISIBILITY, on_click=ver_contra) ,password=True, autofocus=True, icon=ft.Icons.PASSWORD, width=350))
     
     def login_click(e):
         if not correo.value or not contra.value:

@@ -1,6 +1,6 @@
 import flet as ft
 
-logo = ft.Image(src="assets/FinanzasFit.png", width = 150, height = 150)
+logo = ft.Image(src="assets/FinanzasFit.png", width = 250, height = 250)
 
 def InicioView(page):
     
@@ -22,7 +22,6 @@ def InicioView(page):
         controls=[
             ft.Column(
                 [
-                    ft.Icon(ft.Icons.HOME, size=50, color=ft.Colors.GREEN),
                     logo,
                     ft.Text(f"Bienvenido, {page.user_data['nombre']}!", size=24, weight="bold"),
                     ft.Text("Bienvenido a Finanzas Fit", size=24, weight="bold"),
