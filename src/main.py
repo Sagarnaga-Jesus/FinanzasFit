@@ -3,6 +3,7 @@ from views.LoginView import LoginView
 from views.RegistroView import RegistroView
 from views.InicioView import InicioView
 from views.OlvidadoView import OlvidadoView
+from views.PerfilView import PerfilView
 from controllers.UserController import AuthController
 
 #The is Admin#08
@@ -27,6 +28,8 @@ def start(page: ft.Page):
             page.views.append(OlvidadoView(page, auth))
         elif page.route == "/inicio":
             page.views.append(InicioView(page))
+        elif page.route == "/perfil":
+            page.views.append(PerfilView(page, auth))
         page.update()
 
     def view_pop(e):

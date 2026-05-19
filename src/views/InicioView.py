@@ -7,6 +7,9 @@ def InicioView(page):
     def cerrar_sesion():
         page.go("/")
         
+    def ir_perfil():
+        page.go("/perfil")
+        
     return ft.View(
         route="/inicio",
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
@@ -16,6 +19,7 @@ def InicioView(page):
             bgcolor=ft.Colors.BLUE_GREY_900,
             color="white",
             actions=[
+                    ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=ir_perfil, tooltip="Perfil"),
                     ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=cerrar_sesion,tooltip="Cerrar sesión")
                 ],
         ),
