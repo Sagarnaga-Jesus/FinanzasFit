@@ -7,7 +7,6 @@ def OlvidadoView(page, auth_controller):
         
     correo= ft.TextField(label="Correo",autofocus=True, icon=ft.Icons.PERSON, width=400 )
     txt_codigo = ft.TextField(label="Código",visible=False)
-#    tarjeta = ft.Card(content = ft.Column([correo, txt_codigo, verificar,]))
     
     
     def enviar_codigo(e):
@@ -42,6 +41,7 @@ def OlvidadoView(page, auth_controller):
             )
             servidor.quit()
             page.show_dialog(ft.SnackBar(ft.Text("Codigo enviado con exito"),bgcolor="green"))
+            tarjeta.visible = True
             txt_codigo.visible = True
             verificar.visible = True
             txt1.visible = True
@@ -58,6 +58,7 @@ def OlvidadoView(page, auth_controller):
         if datetime.now()>expira:
             codigo = ""
             expira = ""
+            tarjeta.visible = False
             txt_codigo.visible = False
             verificar.visible = False
             txt1.visible = False
@@ -68,9 +69,9 @@ def OlvidadoView(page, auth_controller):
             txt.visible = True
             page.update()
         else:
-            page.show_dialog(ft.SnackBar(ft.Text("Codigo incorecto"),bgcolor="red"))
+            page.show_dialog(ft.SnackBar(ft.Text("Codigo incorrecto"),bgcolor="red"))
     
-    def cambiar():
+    def cambiar(e):
         listo,msg = auth_controller.cambiar(nueva.value,correo.value)
         if listo:
             page.show_dialog(ft.SnackBar(ft.Text(msg),bgcolor="green"))
@@ -83,7 +84,7 @@ def OlvidadoView(page, auth_controller):
         nueva.password = not nueva.password
         nueva.update()
         
-    def regresar():
+    def regresar(e):
         page.go("/")
         
     reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar))
@@ -94,6 +95,18 @@ def OlvidadoView(page, auth_controller):
     enviar= ft.ElevatedButton("Crear codigo", on_click=enviar_codigo, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
     txt = ft.Text("Ingrese su nueva contraseña", size=14, weight="bold", color="blue", visible=False)
     txt1 = ft.Text("Capture el codigo que recibio", size=14, weight="bold", color="blue", visible=False)
+    
+    tarjeta = ft.Card(
+        visible = False, 
+        content = ft.Column(
+            [
+                txt1, 
+                txt_codigo, 
+                verificar, 
+                txt, 
+                nueva, 
+                cambia_nueva
+                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=20))
     
     return ft.View(
         route="/",
@@ -112,12 +125,7 @@ def OlvidadoView(page, auth_controller):
                     correo,
                     enviar,
                     reversa,
-                    txt1,
-                    txt_codigo,
-                    verificar,
-                    txt,
-                    nueva,
-                    cambia_nueva
+                    tarjeta
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=20,

@@ -5,7 +5,6 @@ import os
 logo = ft.Image(src="assets/FinanzasFit.png", width = 100, height = 100, border_radius = 100)
 
 def RegistroView(page: ft.Page, auth_controller):
-    page.padding=30
     
     def ver_contra():
         contra.password = not contra.password
