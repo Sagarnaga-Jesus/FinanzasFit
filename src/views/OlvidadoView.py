@@ -20,6 +20,7 @@ def OlvidadoView(page, auth_controller):
         if existe:
             codigo = random.randint(100000,999999)
             page.codigo = codigo
+            page.expira = datetime.now()+timedelta(minutes=1)
             remitente = "23308060610335@cetis61.edu.mx"
             password = "kraf vtjr arsu gcxz"
             correo.value
@@ -53,16 +54,15 @@ def OlvidadoView(page, auth_controller):
             
     
     def verifica(e):
-        codigo = getattr(page, "codigo")
-        expira = datetime.now()+timedelta(minutes=1)
+        codigo = getattr(page, "codigo", None)
+        expira = getattr(page, "expira", None)
         if datetime.now()>expira:
-            codigo = ""
-            expira = ""
+            codigo = None
+            expira = None
+            txt_codigo.value = ""
             tarjeta.visible = False
-            txt_codigo.visible = False
-            verificar.visible = False
-            txt1.visible = False
             page.show_dialog(ft.SnackBar(ft.Text("Codigo expirado"),bgcolor="red"))
+            page.update()
         elif txt_codigo.value == str(codigo):
             nueva.visible=True
             cambia_nueva.visible = True
