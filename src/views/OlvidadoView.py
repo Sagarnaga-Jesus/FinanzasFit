@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 def OlvidadoView(page, auth_controller):  
         
     correo= ft.TextField(label="Correo",autofocus=True, icon=ft.Icons.PERSON, width=400 )
-    txt_codigo = ft.TextField(label="Código",visible=False)
+    txt_codigo = ft.TextField(label="Código")
     
     
     def enviar_codigo(e):
@@ -43,9 +43,6 @@ def OlvidadoView(page, auth_controller):
             servidor.quit()
             page.show_dialog(ft.SnackBar(ft.Text("Codigo enviado con exito"),bgcolor="green"))
             tarjeta.visible = True
-            txt_codigo.visible = True
-            verificar.visible = True
-            txt1.visible = True
             page.update()
             
         else:
@@ -89,12 +86,12 @@ def OlvidadoView(page, auth_controller):
         
     reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar))
     
-    verificar = ft.ElevatedButton("Verificar",visible=False,on_click=verifica)
+    verificar = ft.ElevatedButton("Verificar",on_click=verifica, visible=True)
     cambia_nueva = ft.ElevatedButton("Cambiar contraseña",visible=False,on_click=cambiar)
     nueva=(ft.TextField(label="Contraseña nueva",visible=False,suffix=ft.IconButton(icon=ft.Icons.VISIBILITY, on_click=ver_contra) ,password=True, autofocus=True, icon=ft.Icons.PASSWORD))
     enviar= ft.ElevatedButton("Crear codigo", on_click=enviar_codigo, width=350, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.MAIL, color=ft.Colors.WHITE, size=25)))
     txt = ft.Text("Ingrese su nueva contraseña", size=14, weight="bold", color="blue", visible=False)
-    txt1 = ft.Text("Capture el codigo que recibio", size=14, weight="bold", color="blue", visible=False)
+    txt1 = ft.Text("Capture el codigo que recibio", size=14, weight="bold", color="blue")
     
     tarjeta = ft.Card(
         visible = False, 
