@@ -25,8 +25,8 @@ def OlvidadoView(page, auth_controller):
             password = "kraf vtjr arsu gcxz"
             correo.value
             
-            mensaje = MIMEText(f"Tu codigo es: {codigo}")
-            mensaje["subject"] = "Recuperar password"
+            mensaje = MIMEText(f"Tu codigo de verificacion es: {codigo}")
+            mensaje["subject"] = "Cambio de contrasÆa"
             mensaje["From"] = remitente
             mensaje["To"] = correo.value
             
