@@ -1,6 +1,6 @@
 import flet as ft
 
-logo = ft.Image(src="assets/FinanzasFit.png", width = 250, height = 250)
+logo = ft.Image(src="assets/FinanzasFit.png", width = 250, height = 250, border_radius = 100)
 
 def InicioView(page):
     
@@ -15,7 +15,7 @@ def InicioView(page):
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         appbar=ft.AppBar(
-            title=ft.Text("Inicio"),
+            title=ft.Text(f"Bienvenido a FinanzasFit, {page.user_data['nombre']}!", size=20),
             bgcolor=ft.Colors.BLUE_GREY_900,
             color="white",
             actions=[
@@ -28,8 +28,8 @@ def InicioView(page):
                 [
                     logo,
                     ft.Text(f"Bienvenido, {page.user_data['nombre']}!", size=24, weight="bold"),
-                    ft.Text("Bienvenido a Finanzas Fit", size=24, weight="bold"),
-                    ft.Text("Tu compañero para una vida financiera mas comoda y segura", size=16)
+                    ft.Text("Tu compañero para una vida financiera mas comoda y segura", size=20),
+                    ft.Text("Comienza a gestionar tu dinero de manera inteligente y alcanza tus metas financieras", size=20)
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=10
