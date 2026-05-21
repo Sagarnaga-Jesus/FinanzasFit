@@ -13,6 +13,15 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
 ### Diagrama ER.  
 <img width="400" height="450" alt="Diagrama ER" src="https://github.com/user-attachments/assets/4f3ea4eb-b5e4-4a1e-93b6-a10a003f0b68" />
 
+## Estapa 1  
+"Primer etapa la realizion de el documento README y la funcion del inicio de sesion."
+
+## Etapa 2  
+"El registro del usuario funcional y que la opcion de olvide contraseña funcione correctamente."
+
+## Etapa 3  
+"Diseño de la interfaz principal de la aplicacion."
+
 ## Integrantes
 
 - **Romo Alvarado Luis Angel**
@@ -26,7 +35,7 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
 - **Sagarnaga Macias Jesus Antonio**  
   - Correo Electronico:23308060610320@cetis61.edu.mx
   - Edad: 17
-  - Especialida: Programacion
+  - Especialidad: Programacion
   - Instituto: CETis61
   ### Fotografia
   ![Jesus](assets/sagarnaga.png)
