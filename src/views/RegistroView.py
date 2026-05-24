@@ -82,16 +82,17 @@ def RegistroView(page: ft.Page, auth_controller):
         route="/registro",
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        bgcolor = "#B8FF9C",
         appbar=ft.AppBar(
             title=ft.Text("Registro"),
-            bgcolor=ft.Colors.BLUE_GREY_900,
-            color="white"
+            bgcolor="#000000",
+            color="#1AC91A",
         ),
         controls=[
             ft.Column(
                 [
-                    logo,
-                    ft.Icon(ft.Icons.ACCOUNT_BOX, size=50, color=ft.Colors.BLUE),
+#                    logo,
+                    ft.Icon(ft.Icons.ACCOUNT_BOX, size=80, color=ft.Colors.BLACK),
                     ft.Text("Registro de usuario", size=30, weight="bold"),
                     nombre,
                     correo,

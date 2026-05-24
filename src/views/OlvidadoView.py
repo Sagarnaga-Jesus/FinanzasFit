@@ -109,10 +109,11 @@ def OlvidadoView(page, auth_controller):
         route="/",
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        bgcolor = "#B8FF9C",
         appbar=ft.AppBar(
             title=ft.Text("Login"),
-            bgcolor=ft.Colors.BLUE_GREY_900,
-            color="white"
+            bgcolor="#000000",
+            color="#1AC91A",
         ),
         controls=[
             ft.Column(

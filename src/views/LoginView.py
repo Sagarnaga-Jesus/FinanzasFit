@@ -39,16 +39,17 @@ def LoginView(page: ft.Page, auth_controller):
         route="/",
         vertical_alignment=ft.MainAxisAlignment.CENTER, 
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        bgcolor = "#B8FF9C",
         appbar=ft.AppBar(
-            title=ft.Text("Login"),
-            bgcolor=ft.Colors.BLUE_GREY_900,
-            color="white"
+            title=ft.Text("Inicio de sesion"),
+            bgcolor="#000000",
+            color="#1AC91A",
         ),
         controls=[
             ft.Column(
                 [
 #                    logo,
-                    ft.Icon(ft.Icons.LOCK_PERSON, size=50, color=ft.Colors.GREEN),
+                    ft.Icon(ft.Icons.LOCK_PERSON, size=80, color=ft.Colors.BLACK),
                     ft.Text("Acceso al sistema de Finanzas Fit", size=24, weight="bold"),
                     correo,
                     contra,
