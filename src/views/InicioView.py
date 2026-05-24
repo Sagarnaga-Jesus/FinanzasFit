@@ -61,7 +61,9 @@ def InicioView(page):
             color="#1AC91A",
             actions=[
                     ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=ir_perfil, tooltip="Perfil"),
-                    ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=cerrar_sesion,tooltip="Cerrar sesión")
+                    ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=cerrar_sesion,tooltip="Cerrar sesión"),
+                    ft.IconButton(ft.Icons.MONEY, on_click=ir_presupuesto, tooltip="Consultar dinero"),
+                    ft.IconButton(ft.Icons.PAYMENTS, on_click=ir_gastos, tooltip="Consultar gastos")
                 ],
         ),
         controls=[

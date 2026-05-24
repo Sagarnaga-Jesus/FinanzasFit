@@ -13,6 +13,7 @@ def PerfilView(page: ft.Page, auth_controller):
                 ft.Divider(),
                 ft.Text(f"Nombre: {user['nombre']}"),
                 ft.Text(f"Correo: {user['email']}"),
+                ft.Text(f"Fecha de registro: {user['fecha_registro']}")
             ], 
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 alignment=ft.MainAxisAlignment.CENTER,
