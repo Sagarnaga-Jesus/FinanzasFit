@@ -6,6 +6,9 @@ class DineroController:
 
     def guardar_presupuesto(self, cantidad, id_usuario):
         self.model.agregar_presupuesto(cantidad, id_usuario)
+    
+    def restar_presupuesto(self, cantidad, id_usuario):
+        self.model.resta_presupuesto(cantidad, id_usuario)
 
     def consultar_total(self, id_usuario):
         return self.model.obtener_total(id_usuario)

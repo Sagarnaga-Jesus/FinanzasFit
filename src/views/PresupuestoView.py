@@ -3,7 +3,8 @@ import flet as ft
 def PresupuestoView(page, controller):
     user = page.user_data
     
-    dinero = ft.TextField(label="Ingreso de dinero", width=200)
+    dinero = ft.TextField(label="Ingreso de dinero", width=300)
+    dinero_quitar = ft.TextField(label="Quitar dinero", width=300)
     total_text = ft.Text(f"Total guardado: {controller.consultar_total(user['id_usuario'])}")
 
     def guardar(e):
@@ -13,6 +14,20 @@ def PresupuestoView(page, controller):
                 controller.guardar_presupuesto(cantidad, user["id_usuario"])
                 total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
                 page.update()
+                dinero = ""
+            except ValueError:
+                page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
+                page.snack_bar.open = True
+                page.update()
+    
+    def guardar2(e):
+        if dinero_quitar.value:
+            try:
+                cantidad = float(dinero_quitar.value)
+                controller.restar_presupuesto(cantidad, user["id_usuario"])
+                total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
+                page.update()
+                dinero_quitar = ""
             except ValueError:
                 page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
                 page.snack_bar.open = True
@@ -23,6 +38,13 @@ def PresupuestoView(page, controller):
         tooltip="Agregar",
         bgcolor=ft.Colors.GREEN,
         on_click=guardar
+    )
+    
+    agregar_2 = ft.IconButton(
+        ft.Icons.ADD,
+        tooltip="Agregar",
+        bgcolor=ft.Colors.GREEN,
+        on_click=guardar2
     )
 
     card_dinero = ft.Card(
@@ -59,7 +81,7 @@ def PresupuestoView(page, controller):
             ],
         ),
         controls=[
-            ft.Row([dinero, agregar], spacing=20),
+            ft.Row([dinero, agregar, dinero_quitar, agregar_2], spacing=20),
             ft.Divider(),
             card_dinero
         ]
