@@ -46,6 +46,13 @@ def PresupuestoView(page, controller):
         bgcolor=ft.Colors.GREEN,
         on_click=guardar2
     )
+    
+    eliminar = ft.IconButton(
+        ft.Icons.ADD,
+        tooltip="Eliminar presupuesto",
+        bgcolor=ft.Colors.GREEN,
+        on_click=guardar2
+    )
 
     card_dinero = ft.Card(
         content=ft.Container(
