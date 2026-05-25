@@ -73,36 +73,38 @@ def ModificarView(page, AuthController):
         if not nombre_nuevo.value:
             page.show_dialog(ft.SnackBar(ft.Text("Complete los campos")))
             return False
-            
+    
         else:
             nombre_foto = "Default.webp"
-        
-            if hasattr(page, "foto_path"):
+    
+            if hasattr(page, "foto_nueva_path"):
                 destino = os.path.join(
-                        "assets",
-                        page.foto_name
-                    )
-        
+                    "assets",
+                    page.foto_nueva_name
+                )
+    
                 shutil.copy(
-                    page.foto_path,
+                    page.foto_nueva_path,
                     destino
                 )
-            
-                nombre_foto = page.foto_name
-            
-            success= AuthController.modificar(
+    
+                nombre_foto = page.foto_nueva_name
+    
+            success = AuthController.modificar(
                 user['id_usuario'],
                 nombre_nuevo.value,
                 nombre_foto
             )
+    
             if success:
                 page.show_dialog(ft.SnackBar(ft.Text("Perfil actualizado correctamente")))
                 user['nombre'] = nombre_nuevo.value
-                user['foto'] = page.foto_nueva_name
-
+                user['foto'] = nombre_foto
+    
                 page.user_data = user
                 page.go("/perfil")
                 page.update()
+    
             else:
                 page.show_dialog(ft.SnackBar(ft.Text("Error al actualizar perfil")))
     
