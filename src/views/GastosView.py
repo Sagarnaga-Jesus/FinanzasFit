@@ -26,13 +26,10 @@ def GastosView(page: ft.Page):
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             alignment=ft.MainAxisAlignment.CENTER,
             spacing=10
-                    )],
-            elevation=5,
-            margin=10,
-            shape=ft.RoundedRectangleBorder(radius=12),)
+                    )
+            ])
         ]
     )))
-    
     
     return ft.View(
         route="/gastos",
