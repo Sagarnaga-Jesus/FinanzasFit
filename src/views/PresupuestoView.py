@@ -14,7 +14,7 @@ def PresupuestoView(page, controller):
                 controller.guardar_presupuesto(cantidad, user["id_usuario"])
                 total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
                 page.update()
-                dinero = ""
+                dinero.value = ""
             except ValueError:
                 page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
                 page.snack_bar.open = True
@@ -27,7 +27,7 @@ def PresupuestoView(page, controller):
                 controller.restar_presupuesto(cantidad, user["id_usuario"])
                 total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
                 page.update()
-                dinero_quitar = ""
+                dinero_quitar.value = ""
             except ValueError:
                 page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
                 page.snack_bar.open = True
