@@ -3,18 +3,7 @@ import flet as ft
 logo = ft.Image(src="assets/FinanzasFit.png", width = 200, height = 200, border_radius = 100)
 
 def InicioView(page):
-    
-    def cerrar_sesion(e):
-        page.go("/")
         
-    def ir_perfil(e):
-        page.go("/perfil")
-    
-    def ir_presupuesto():
-        page.go("/presupuesto")
-        
-    def ir_gastos():
-        page.go("/gastos")
         
     inicio=  ft.Card(
             content=ft.Container(
@@ -60,10 +49,10 @@ def InicioView(page):
             bgcolor="#000000",
             color="#1AC91A",
             actions=[
-                    ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=ir_perfil, tooltip="Perfil"),
-                    ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=cerrar_sesion,tooltip="Cerrar sesión"),
-                    ft.IconButton(ft.Icons.MONEY, on_click=ir_presupuesto, tooltip="Consultar dinero"),
-                    ft.IconButton(ft.Icons.PAYMENTS, on_click=ir_gastos, tooltip="Consultar gastos")
+                    ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=lambda _:page.go("/perfil"), tooltip="Perfil"),
+                    ft.IconButton(ft.Icons.MONEY, on_click=lambda _:page.go("/presupuesto"), tooltip="Consultar dinero"),
+                    ft.IconButton(ft.Icons.PAYMENTS, on_click=lambda _:page.go("/gastos"), tooltip="Consultar gastos"),
+                    ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=lambda _:page.go("/"),tooltip="Cerrar sesión"),
                 ],
         ),
         controls=[
