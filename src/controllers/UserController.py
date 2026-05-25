@@ -25,9 +25,9 @@ class AuthController:
         except ValidationError as e:
             return False, e.errors()[0]['msg']
     
-    def modificar(self, id_usuario, nombre, apellido, telefono, foto):
+    def modificar(self, id_usuario, nombre, foto):
         try:
-            success = self.model.modificar_perfil(id_usuario, nombre, apellido, telefono, foto)
+            success = self.model.modificar_perfil(id_usuario, nombre,foto)
             return success
         except Exception as e:
             print(f"Error al modificar perfil: {e}")

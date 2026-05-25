@@ -42,15 +42,13 @@ class UsuarioModel:
         finally:
             conn.close()
     
-    def modificar_perfil(self, id_usuario, nombre, apellido, telefono, foto):
+    def modificar_perfil(self, id_usuario, nombre, foto):
         conn = self.db.get_connection()
         cursor = conn.cursor()
         
         try:
             
             cursor.execute("UPDATE usuario SET nombre = %s WHERE id_usuario = %s", (nombre, id_usuario))
-            cursor.execute("UPDATE usuario SET apellido = %s WHERE id_usuario = %s", (apellido, id_usuario))
-            cursor.execute("UPDATE usuario SET telefono = %s WHERE id_usuario = %s", (telefono, id_usuario))
             cursor.execute("UPDATE usuario SET foto = %s WHERE id_usuario = %s", (foto, id_usuario))
             
             conn.commit()

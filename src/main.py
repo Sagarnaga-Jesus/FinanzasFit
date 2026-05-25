@@ -3,7 +3,7 @@ from views.LoginView import LoginView
 from views.RegistroView import RegistroView
 from views.InicioView import InicioView
 from views.OlvidadoView import OlvidadoView
-from views.PerfilView import PerfilView
+from views.PerfilView import PerfilView,ModificarView
 from views.GastosView import GastosView
 from views.PresupuestoView import PresupuestoView
 from controllers.UserController import AuthController
@@ -34,6 +34,8 @@ def start(page: ft.Page):
             page.views.append(InicioView(page))
         elif page.route == "/perfil":
             page.views.append(PerfilView(page, auth))
+        elif page.route == "/modificar":
+            page.views.append(ModificarView(page, auth))
         elif page.route == "/gastos":
             page.views.append(GastosView(page))
         elif page.route == "/presupuesto":
