@@ -8,6 +8,7 @@ from views.GastosView import GastosView
 from views.PresupuestoView import PresupuestoView
 from controllers.UserController import AuthController
 from controllers.DineroController import DineroController
+from controllers.GastoController import GastoController
 
 #The is Admin#08
 
@@ -20,6 +21,7 @@ def start(page: ft.Page):
     
     auth = AuthController()
     dinero = DineroController()
+    gasto = GastoController()
     
     def route_change(e):
         page.views.clear()
@@ -37,7 +39,7 @@ def start(page: ft.Page):
         elif page.route == "/modificar":
             page.views.append(ModificarView(page, auth))
         elif page.route == "/gastos":
-            page.views.append(GastosView(page))
+            page.views.append(GastosView(page, gasto))
         elif page.route == "/presupuesto":
             page.views.append(PresupuestoView(page,dinero))
         page.update()
