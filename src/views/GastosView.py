@@ -6,34 +6,62 @@ import os
 def GastosView(page: ft.Page):
     user = page.user_data
     
+    lista_gastos = ft.GridView(expand=True, max_extent=350, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
+    
     def guardar(e):
         pass
+    
+    titulo = ft.TextField(label="Titulo")
+    descripcion = ft.TextField(label="Descripcion")
+    tipo = ft.Dropdown(
+        label="Tipo de gasto",
+        width=400,
+        options=[
+            ft.dropdown.Option("Negocio"),
+            ft.dropdown.Option("Hogar"),
+            ft.dropdown.Option("Educativo"),
+            ft.dropdown.Option("Familiar"),
+            ft.dropdown.Option("Diario"),
+            ft.dropdown.Option("Otro"),
+        ]
+    )
+    gasto_aprox = ft.TextField(label="Dienero a utulizar")
+    agregar = ft.IconButton(ft.Icons.ADD_BOX, on_click=guardar, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10), color="BLACK"), icon_size=40, tooltip="Agregar unidad")
+    
+    formulario = ft.Row([
+                    ft.Column([
+                        ft.Row([
+                            ft.Text("Añadir nuevo gasto", size=18, weight="bold", color="black"),
+                            titulo, agregar
+                        ], alignment=ft.MainAxisAlignment.CENTER, spacing=10),
+                        ft.Row([
+                            descripcion, tipo, gasto_aprox
+                            ]),
+                            
+                    ],alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER,),
+                    
+                ], alignment=ft.MainAxisAlignment.CENTER,)
         
     gasto = ft.Card(
+        width=520,
+        height=250,
         content = ft.Container(
             padding=15,
             content = ft.Column([
-            ft.Text("Gastos", size=20, weight="bold"),
-            ft.Text("En esta seccion podras registrar tus gastos realizados", size=14),
-            ft.Text("Descripcion de gasto", size=20),
-            ft.TextField(label="Descripcion del gasto", width=300, multiline=True, bgcolor=ft.Colors.WHITE, color=ft.Colors.BLACK),
-            ft.Row([
-                ft.Column([
-                    ft.ElevatedButton(content="Añadir gasto", bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE),
-                    ft.ElevatedButton(content="Cambiar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE),
-                    ft.ElevatedButton(content="Eliminar gasto", bgcolor=ft.Colors.RED_400, color=ft.Colors.WHITE),
-                ],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=10
-                    )
-            ])
-        ]
-    )))
+                ft.Text("titulo de Gastos", size=20, weight="bold"),
+                ft.Text("Descripcion de gasto", size=20),
+                    ft.Row([
+                        ft.ElevatedButton(content="Realizado gasto", bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE),
+                        ft.ElevatedButton(content="Cambiar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE),
+                        ft.ElevatedButton(content="Eliminar gasto", bgcolor=ft.Colors.RED_400, color=ft.Colors.WHITE),
+                    ],alignment=ft.MainAxisAlignment.CENTER, spacing=10)
+            ],horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        )
+    )
     
     return ft.View(
         route="/gastos",
-        vertical_alignment=ft.MainAxisAlignment.CENTER, 
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         bgcolor = "#B8FF9C",
         appbar=ft.AppBar(
@@ -48,6 +76,8 @@ def GastosView(page: ft.Page):
             ],
         ),
         controls=[
+            formulario,
+            ft.Divider(height=4, thickness=4, color=ft.Colors.BLACK),
             gasto
         ],
         spacing=20,
