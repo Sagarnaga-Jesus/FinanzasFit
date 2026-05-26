@@ -11,11 +11,12 @@ def GastosView(page: ft.Page):
     def guardar(e):
         pass
     
-    titulo = ft.TextField(label="Titulo")
-    descripcion = ft.TextField(label="Descripcion")
+    titulo = ft.TextField(label="Titulo", bgcolor="white")
+    descripcion = ft.TextField(label="Descripcion", bgcolor="white")
     tipo = ft.Dropdown(
         label="Tipo de gasto",
         width=400,
+        bgcolor="white",
         options=[
             ft.dropdown.Option("Negocio"),
             ft.dropdown.Option("Hogar"),
@@ -25,7 +26,7 @@ def GastosView(page: ft.Page):
             ft.dropdown.Option("Otro"),
         ]
     )
-    gasto_aprox = ft.TextField(label="Dienero a utulizar")
+    gasto_aprox = ft.TextField(label="Dienero a utulizar", bgcolor="white")
     agregar = ft.IconButton(ft.Icons.ADD_BOX, on_click=guardar, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10), color="BLACK"), icon_size=40, tooltip="Agregar unidad")
     
     formulario = ft.Row([
