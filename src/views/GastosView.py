@@ -9,10 +9,8 @@ def GastosView(page, GastoController):
     lista_gastos = ft.GridView(expand=True, max_extent=350, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
     
     def guardar(e):
-        cantidad = gasto_aprox.value
-        descripcion = f"{titulo.value} - {descripcion.value} - {tipo.value} - {gasto_aprox.value}"
         usuario = user['id_usuario']        
-        GastoController.guardar_gasto(titulo.value, descripcion.value, tipo.value, gasto_aprox.value, id_usuario.value)
+        GastoController.guardar_gasto(titulo.value, descripcion.value, tipo.value, gasto_aprox.value, usuario)
         
 
 
