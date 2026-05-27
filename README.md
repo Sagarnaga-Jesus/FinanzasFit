@@ -22,6 +22,9 @@ Hemos detectado 3 entidades que son las que nos ayudaran a manejar este proyecto
 ## Etapa 3  
 "Diseño de la interfaz principal de la aplicacion."
 
+## Estapa 4
+""
+
 ## Integrantes
 
 - **Romo Alvarado Luis Angel**
