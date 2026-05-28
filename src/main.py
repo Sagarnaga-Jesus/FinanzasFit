@@ -16,7 +16,7 @@ def start(page: ft.Page):
     page.title = "Finanzas Fit"
     page.scroll = ft.ScrollMode.AUTO
     page.theme_mode = ft.ThemeMode.LIGHT
-    page.window_width = 450
+    page.window_width = 500
     page.window_height = 700
     
     auth = AuthController()

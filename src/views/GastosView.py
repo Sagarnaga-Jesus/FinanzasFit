@@ -5,12 +5,65 @@ import os
 
 def GastosView(page, gasto_controller):
     user = page.user_data
+    usuario = user['id_usuario']       
     
-    lista_gastos = ft.GridView(expand=True, max_extent=350, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
+    lista_gastos = ft.GridView(expand=True, max_extent=400, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
+    
+    def  eliminar_gasto(g):
+        gasto=gasto_controller.eliminar_gasto(g["id_gasto"], usuario, g["gasto_aprox"])
+        if gasto:
+            cargar_gastos()
+            page.show_dialog(ft.SnackBar(ft.Text(gasto)))
+    
+    def cargar_gastos():
+        lista_gastos.controls.clear()
+        gastos=gasto_controller.obtener_gastos(usuario)
+    
+        for g in gastos:
+            lista_gastos.controls.append(
+                ft.Card(
+                    width=520,
+                    height=350,
+                    content = ft.Container(
+                        padding=15,
+                        content = ft.Column([
+                            ft.Text(g["titulo"], size=20, weight="bold"),
+                            ft.Text(f"Descripcion: {g["descripcion"]}", size=20),
+                            ft.Text(f"Dinero a gastar: {g["gasto_aprox"]}", size=20),
+                                ft.Column([
+                                    ft.Row(ft.ElevatedButton(content="Confirmar gasto", bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
+                                    ,
+                                    ft.Row(ft.ElevatedButton(content="Modificar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
+                                    ,
+                                    ft.Row(ft.ElevatedButton(content="Eliminar gasto", on_click= lambda e, gasto=g: eliminar_gasto(gasto) , bgcolor=ft.Colors.RED_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
+                                    ,
+                                ],alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=14)
+                        ],horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        )
+                    )
+                )
+            )
+        page.update()
+        
+    cargar_gastos()
     
     def guardar(e):
-        usuario = user['id_usuario']        
-        gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, gasto_aprox.value, usuario)
+        if not titulo.value.strip() or not descripcion.value.strip() or not tipo.value:
+            page.show_dialog(ft.SnackBar(ft.Text("Todos los campos son obligatorios")))
+            return
+        
+        if not gasto_aprox.value.strip():
+            dinero=0
+        else:
+            dinero = float(gasto_aprox.value)
+        
+        gasto = gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, dinero, usuario)
+        
+        if gasto:
+            cargar_gastos()
+            titulo.value = ""
+            descripcion.value = ""
+            gasto_aprox.value = ""
         
 
     titulo = ft.TextField(label="Titulo", bgcolor="white")
@@ -25,6 +78,7 @@ def GastosView(page, gasto_controller):
             ft.dropdown.Option("Educativo"),
             ft.dropdown.Option("Familiar"),
             ft.dropdown.Option("Diario"),
+            ft.dropdown.Option("Ahorro"),
             ft.dropdown.Option("Otro"),
         ]
     )
@@ -45,23 +99,7 @@ def GastosView(page, gasto_controller):
                     
                 ], alignment=ft.MainAxisAlignment.CENTER,)
         
-    gasto = ft.Card(
-        width=520,
-        height=250,
-        content = ft.Container(
-            padding=15,
-            content = ft.Column([
-                ft.Text("titulo del gasto", size=20, weight="bold"),
-                ft.Text("Descripcion de gasto", size=20),
-                    ft.Row([
-                        ft.ElevatedButton(content="Confirmar gasto", bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE),
-                        ft.ElevatedButton(content="Modificar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE),
-                        ft.ElevatedButton(content="Eliminar gasto", bgcolor=ft.Colors.RED_400, color=ft.Colors.WHITE),
-                    ],alignment=ft.MainAxisAlignment.CENTER, spacing=10)
-            ],horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            )
-        )
-    )
+    
     
     return ft.View(
         route="/gastos",
@@ -81,7 +119,7 @@ def GastosView(page, gasto_controller):
         controls=[
             formulario,
             ft.Divider(height=4, thickness=4, color=ft.Colors.BLACK),
-            gasto
+            lista_gastos
         ],
         spacing=20,
     )

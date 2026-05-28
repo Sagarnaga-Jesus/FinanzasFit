@@ -6,7 +6,7 @@ def PerfilView(page: ft.Page, auth_controller):
     user = page.user_data
     
     def regresar(e):
-        page.go("/inicio")
+        page.go("/")
         
     perfil = ft.Card(
         content = ft.Container(
@@ -48,7 +48,7 @@ def PerfilView(page: ft.Page, auth_controller):
             ft.Text("Bienvenido a tu perfil", size=24, weight="bold"),
             perfil,
             modificar_btn,
-            ft.ElevatedButton("Regresar al inicio", on_click=regresar, width=200, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.HOME, color=ft.Colors.WHITE, size=25)))
+            ft.ElevatedButton("Cerrear Sesion", on_click=regresar, width=200, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.HOME, color=ft.Colors.WHITE, size=25)))
         ],
         spacing=20,
     )
