@@ -19,7 +19,7 @@ class GastoModel:
         conn = self.db.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO gastos (gasto_aprox, id_usuario) VALUES (%s, %s)",
+            "UPDATE gastos (gasto_aprox, id_usuario) VALUES (%s, %s)",
             (cantidad, id_usuario)
         )
         conn.commit()
