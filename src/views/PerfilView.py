@@ -48,7 +48,7 @@ def PerfilView(page: ft.Page, auth_controller):
             ft.Text("Bienvenido a tu perfil", size=24, weight="bold"),
             perfil,
             modificar_btn,
-            ft.ElevatedButton("Cerrear Sesion", on_click=regresar, width=200, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.HOME, color=ft.Colors.WHITE, size=25)))
+            ft.ElevatedButton("Cerrar Sesion", on_click=regresar, width=200, bgcolor="cyan", color = "black", icon=(ft.Icon(ft.Icons.HOME, color=ft.Colors.WHITE, size=25)))
         ],
         spacing=20,
     )

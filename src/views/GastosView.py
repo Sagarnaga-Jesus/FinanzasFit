@@ -71,7 +71,9 @@ def GastosView(page, gasto_controller):
     tipo = ft.Dropdown(
         label="Tipo de gasto",
         width=400,
-        bgcolor="white",
+        filled=True,
+        bgcolor=ft.Colors.WHITE,
+        fill_color=ft.Colors.WHITE,
         options=[
             ft.dropdown.Option("Negocio"),
             ft.dropdown.Option("Hogar"),
