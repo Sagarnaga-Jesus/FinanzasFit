@@ -10,10 +10,12 @@ class GastoController:
         
     def guardar_gasto(self, titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario):
         gasto = self.model.agregar_gasto(titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario)
-        gasto = self.model.restar_gasto(gasto_aprox, id_usuario)
-        return gasto
-#        gasto = self.model.modificar_gasto( cantidad, descripcion)
-    def eliminar_gasto(self,id_gasto, cantidad, id_usuario):
+        if gasto:
+            resta = self.model.restar_gasto(gasto_aprox, id_usuario)
+            
+            return True, "Gasto agregado a lista"
+
+    def eliminar_gasto(self,id_gasto, id_usuario, cantidad,):
         eliminar=self.model.eliminar_gasto(id_gasto, cantidad, id_usuario)
         
         return eliminar
