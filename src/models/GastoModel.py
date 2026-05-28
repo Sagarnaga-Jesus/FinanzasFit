@@ -4,24 +4,25 @@ class GastoModel:
     def __init__(self):
         self.db = Database()
 
-    def agregar_gasto(self, cantidad, descripcion, id_usuario):
+    def agregar_gasto(self, titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO gastos (gasto_aprox, descripcion, id_usuario) VALUES (%s, %s, %s)",
-            (cantidad, descripcion, id_usuario)
+            "INSERT INTO gastos (titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario) VALUES (%s, %s, %s, %s, %s)",
+            (titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario)
         )
         conn.commit()
         cursor.close()
         conn.close()
         
-    def restar_gasto(self, cantidad, id_usuario):
+    def restar_gasto(self, gasto_aprox, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE gastos (gasto_aprox, id_usuario) VALUES (%s, %s)",
-            (cantidad, id_usuario)
+            "UPDATE dinero SET presupuesto = presupuesto - %s WHERE id_usuario =%s",
+            (gasto_aprox, id_usuario)
         )
+
         conn.commit()
         cursor.close()
         conn.close()

@@ -3,19 +3,16 @@ from datetime import datetime
 import shutil
 import os
 
-def GastosView(page, GastoController):
+def GastosView(page, gasto_controller):
     user = page.user_data
     
     lista_gastos = ft.GridView(expand=True, max_extent=350, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
     
     def guardar(e):
         usuario = user['id_usuario']        
-        GastoController.guardar_gasto(titulo.value, descripcion.value, tipo.value, gasto_aprox.value, usuario)
+        gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, gasto_aprox.value, usuario)
         
 
-
-        
-    
     titulo = ft.TextField(label="Titulo", bgcolor="white")
     descripcion = ft.TextField(label="Descripcion", bgcolor="white")
     tipo = ft.Dropdown(
