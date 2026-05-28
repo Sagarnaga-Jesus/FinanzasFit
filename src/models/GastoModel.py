@@ -54,7 +54,7 @@ class GastoModel:
         conn.commit()
         cursor.close()
         conn.close()
-        return "Gasto agregado a lista"
+        return True
         
     def restar_gasto(self, gasto_aprox, id_usuario):
         conn = self.db.get_connection()

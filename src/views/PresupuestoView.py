@@ -75,7 +75,6 @@ def PresupuestoView(page, controller):
             actions=[
                 ft.IconButton(ft.Icons.HOME, on_click=lambda _:page.go("/inicio"), tooltip="Inicio"),
                 ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=lambda _:page.go("/perfil"), tooltip="Perfil"),
-                ft.IconButton(ft.Icons.MONEY, on_click=lambda _:page.go("/presupuesto"), tooltip="Consultar dinero"),
                 ft.IconButton(ft.Icons.PAYMENTS, on_click=lambda _:page.go("/gastos"), tooltip="Consultar gastos"),
                 ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=lambda _:page.go("/"), tooltip="Cerrar sesión"),
             ],

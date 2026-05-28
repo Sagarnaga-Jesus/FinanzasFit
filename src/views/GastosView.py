@@ -57,9 +57,9 @@ def GastosView(page, gasto_controller):
         else:
             dinero = float(gasto_aprox.value)
         
-        gasto = gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, dinero, usuario)
-        
+        gasto, msg = gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, dinero, usuario)
         if gasto:
+            page.show_dialog(ft.SnackBar(ft.Text(msg)))
             cargar_gastos()
             titulo.value = ""
             descripcion.value = ""
