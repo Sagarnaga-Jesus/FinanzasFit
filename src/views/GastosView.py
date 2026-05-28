@@ -3,9 +3,72 @@ from datetime import datetime
 import shutil
 import os
 
-def GastosView(page, gasto_controller):
+def GastosView(page, gasto_controller,controller):
     user = page.user_data
     usuario = user['id_usuario']       
+    
+    dinero = ft.TextField(label="Ingreso de dinero", width=150)
+    dinero_quitar = ft.TextField(label="Quitar dinero", width=150)
+    total_text = ft.Text(f"Total guardado: {controller.consultar_total(user['id_usuario'])}")
+
+    def guardar_presu(e):
+        if dinero.value:
+            try:
+                cantidad = float(dinero.value)
+                controller.guardar_presupuesto(cantidad, user["id_usuario"])
+                total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
+                page.update()
+                dinero.value = ""
+            except ValueError:
+                page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
+                page.snack_bar.open = True
+                page.update()
+    
+    def guardar2(e):
+        if dinero_quitar.value:
+            try:
+                cantidad = float(dinero_quitar.value)
+                controller.restar_presupuesto(cantidad, user["id_usuario"])
+                total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
+                page.update()
+                dinero_quitar.value = ""
+            except ValueError:
+                page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
+                page.snack_bar.open = True
+                page.update()
+
+    agregar_presupuesto = ft.IconButton(
+        ft.Icons.ADD,
+        tooltip="Agregar",
+        bgcolor=ft.Colors.GREEN,
+        on_click=guardar_presu
+    )
+    
+    agregar_2 = ft.IconButton(
+        ft.Icons.ADD,
+        tooltip="Agregar",
+        bgcolor=ft.Colors.GREEN,
+        on_click=guardar2
+    )
+
+    card_dinero = ft.Card(
+        content=ft.Container(
+            content=ft.Column(
+                [
+                    ft.Text("Dinero", size=20, weight="bold"),
+                    total_text,
+                ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                alignment=ft.MainAxisAlignment.CENTER,
+                spacing=10
+            ),
+            width=150,
+            height=100,
+            padding=10,
+        )
+    )
+    
+    #Aqui inicia gastos
     
     lista_gastos = ft.GridView(expand=True, max_extent=400, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
     
@@ -119,6 +182,16 @@ def GastosView(page, gasto_controller):
             ],
         ),
         controls=[
+            ft.Row([
+                ft.Column([
+                    ft.Row([dinero, agregar_presupuesto,])
+                    ]),
+                ft.Column([
+                    ft.Row([dinero_quitar, agregar_2,]),
+                    ]),
+                ft.Column([card_dinero]),
+                ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN,spacing=20),
+            ft.Divider(),
             formulario,
             ft.Divider(height=4, thickness=4, color=ft.Colors.BLACK),
             lista_gastos

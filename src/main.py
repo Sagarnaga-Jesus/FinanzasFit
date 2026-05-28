@@ -39,9 +39,9 @@ def start(page: ft.Page):
         elif page.route == "/modificar":
             page.views.append(ModificarView(page, auth))
         elif page.route == "/gastos":
-            page.views.append(GastosView(page, gasto))
+            page.views.append(GastosView(page, gasto,dinero))
         elif page.route == "/presupuesto":
-            page.views.append(PresupuestoView(page,dinero))
+            page.views.append(PresupuestoView(page, dinero))
         page.update()
 
     def view_pop(e):
