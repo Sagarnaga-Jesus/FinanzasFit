@@ -62,7 +62,7 @@ def RegistroView(page: ft.Page, auth_controller):
             nombre_foto = page.foto_name
         
         hoy = datetime.now()
-        fecha = hoy.strftime("%Y-%m-%d")
+        fecha = hoy.strftime("%Y-%m-%d %H:%M:%S")
         
         user, msg = auth_controller.registrar_Usuario(nombre.value, correo.value, contra.value, fecha, nombre_foto)
         
