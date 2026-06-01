@@ -54,10 +54,7 @@ class GastoModel:
             conn.commit()
             cursor.close()
             conn.close()
-        
-        
-        
-
+    
     def agregar_gasto(self, titulo, descripcion, tipo_gasto, gasto_aprox, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
@@ -70,7 +67,7 @@ class GastoModel:
         cursor.close()
         conn.close()
         return True
-        
+    
     def restar_gasto(self, gasto_aprox, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
