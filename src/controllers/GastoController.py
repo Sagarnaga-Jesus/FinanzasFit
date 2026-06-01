@@ -19,6 +19,10 @@ class GastoController:
         eliminar=self.model.eliminar_gasto(id_gasto, cantidad, id_usuario)
         
         return eliminar
+    
+    def confirmar_gasto(self, id_gasto, id_usuario):
+        confirmar = self.model.confirmar_gasto(id_gasto, id_usuario)
+        return confirmar
 
     def restar_gasto(self, id_gasto, gasto_aprox, id_usuario):
         restar_gasto = self.model.restar_gasto(id_gasto, gasto_aprox, id_usuario)

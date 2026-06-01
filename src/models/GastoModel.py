@@ -20,6 +20,21 @@ class GastoModel:
             cursor.close()
             conn.close()
     
+    def confirmar_gasto(self, id_gasto, id_usuario):
+        conn = self.db.get_connection()
+        cursor = conn.cursor()
+        
+        try:
+            
+            cursor.execute("DELETE FROM gastos WHERE id_gasto = %s", (id_gasto,))
+            return "Gasto confirmado"
+        except Exception as e:
+            return f"Error al confirmar gasto: {e}"
+        finally:
+            conn.commit()
+            cursor.close()
+            conn.close()
+    
     def eliminar_gasto(self,id_gasto, gasto_aprox, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()

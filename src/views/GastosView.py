@@ -1,23 +1,25 @@
 import flet as ft
 from datetime import datetime
-import shutil
-import os
 
 def GastosView(page, gasto_controller,controller):
     user = page.user_data
     usuario = user['id_usuario']       
     
-    dinero = ft.TextField(label="Ingreso de dinero", width=150)
-    dinero_quitar = ft.TextField(label="Quitar dinero", width=150)
-    total_text = ft.Text(f"Total guardado: {controller.consultar_total(user['id_usuario'])}")
+    
+    dinero = ft.TextField(label="Ingreso de dinero", width=200)
+    dinero_quitar = ft.TextField(label="Quitar dinero", width=200)
+    total_text = ft.Text(f"Total disponible: {controller.consultar_total(usuario)}", size=14, weight="bold")
+    
+    def actualizar_total(usuario):
+        total_text.value = f"Total disponible: {controller.consultar_total(usuario)}"
+        page.update()
 
     def guardar_presu(e):
         if dinero.value:
             try:
                 cantidad = float(dinero.value)
                 controller.guardar_presupuesto(cantidad, user["id_usuario"])
-                total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
-                page.update()
+                actualizar_total(user["id_usuario"])
                 dinero.value = ""
             except ValueError:
                 page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
@@ -29,8 +31,7 @@ def GastosView(page, gasto_controller,controller):
             try:
                 cantidad = float(dinero_quitar.value)
                 controller.restar_presupuesto(cantidad, user["id_usuario"])
-                total_text.value = f"Total guardado: {controller.consultar_total(user['id_usuario'])}"
-                page.update()
+                actualizar_total(user["id_usuario"])
                 dinero_quitar.value = ""
             except ValueError:
                 page.snack_bar = ft.SnackBar(ft.Text("Por favor ingresa un número válido"))
@@ -62,19 +63,27 @@ def GastosView(page, gasto_controller,controller):
                 alignment=ft.MainAxisAlignment.CENTER,
                 spacing=10
             ),
-            width=150,
+            width=260,
             height=100,
-            padding=10,
+            padding=15,
         )
     )
     
     #Aqui inicia gastos
     
-    lista_gastos = ft.GridView(expand=True, max_extent=400, child_aspect_ratio=1.2, spacing=20, run_spacing=20)
+    lista_gastos = ft.GridView(expand=True, max_extent=400, child_aspect_ratio=1.2, spacing=40, run_spacing=30)
+    
+    def confirmar_gasto(g):
+        gasto = gasto_controller.confirmar_gasto(g["id_gasto"],usuario)
+        if gasto:
+            actualizar_total(user["id_usuario"])
+            cargar_gastos()
+            page.show_dialog(ft.SnackBar(ft.Text(gasto)))
     
     def  eliminar_gasto(g):
         gasto=gasto_controller.eliminar_gasto(g["id_gasto"], usuario, g["gasto_aprox"])
         if gasto:
+            actualizar_total(user["id_usuario"])
             cargar_gastos()
             page.show_dialog(ft.SnackBar(ft.Text(gasto)))
     
@@ -85,8 +94,12 @@ def GastosView(page, gasto_controller,controller):
         for g in gastos:
             lista_gastos.controls.append(
                 ft.Card(
-                    width=520,
-                    height=350,
+                    width=400,
+                    height=300,
+                    shadow_color=ft.Colors.BLACK_87,
+                    elevation=20,
+                    shape=ft.RoundedRectangleBorder(radius=12),
+                    
                     content = ft.Container(
                         padding=15,
                         content = ft.Column([
@@ -94,7 +107,7 @@ def GastosView(page, gasto_controller,controller):
                             ft.Text(f"Descripcion: {g["descripcion"]}", size=20),
                             ft.Text(f"Dinero a gastar: {g["gasto_aprox"]}", size=20),
                                 ft.Column([
-                                    ft.Row(ft.ElevatedButton(content="Confirmar gasto", bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
+                                    ft.Row(ft.ElevatedButton(content="Confirmar gasto", on_click= lambda e, gasto=g: confirmar_gasto(gasto), bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
                                     ,
                                     ft.Row(ft.ElevatedButton(content="Modificar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
                                     ,
@@ -123,10 +136,12 @@ def GastosView(page, gasto_controller,controller):
         gasto, msg = gasto_controller.guardar_gasto(titulo.value, descripcion.value, tipo.value, dinero, usuario)
         if gasto:
             page.show_dialog(ft.SnackBar(ft.Text(msg)))
+            actualizar_total(user["id_usuario"])
             cargar_gastos()
             titulo.value = ""
             descripcion.value = ""
             gasto_aprox.value = ""
+            page.update()
         
 
     titulo = ft.TextField(label="Titulo", bgcolor="white")
@@ -177,7 +192,6 @@ def GastosView(page, gasto_controller,controller):
             actions=[
                 ft.IconButton(ft.Icons.HOME, on_click=lambda _:page.go("/inicio"), tooltip="Inicio"),
                 ft.IconButton(ft.Icons.ACCOUNT_CIRCLE, on_click=lambda _:page.go("/perfil"), tooltip="Perfil"),
-                ft.IconButton(ft.Icons.MONEY, on_click=lambda _:page.go("/presupuesto"), tooltip="Consultar dinero"),
                 ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=lambda _:page.go("/"), tooltip="Cerrar sesión"),
             ],
         ),
@@ -191,7 +205,7 @@ def GastosView(page, gasto_controller,controller):
                     ]),
                 ft.Column([card_dinero]),
                 ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN,spacing=20),
-            ft.Divider(),
+            ft.Divider(height=4, thickness=4, color=ft.Colors.BLACK),
             formulario,
             ft.Divider(height=4, thickness=4, color=ft.Colors.BLACK),
             lista_gastos
