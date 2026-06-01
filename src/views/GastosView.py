@@ -73,6 +73,8 @@ def GastosView(page, gasto_controller,controller):
     
     lista_gastos = ft.GridView(expand=True, max_extent=400, child_aspect_ratio=1.2, spacing=40, run_spacing=30)
     
+
+    
     def confirmar_gasto(g):
         gasto = gasto_controller.confirmar_gasto(g["id_gasto"],usuario)
         if gasto:
@@ -86,10 +88,46 @@ def GastosView(page, gasto_controller,controller):
             actualizar_total(user["id_usuario"])
             cargar_gastos()
             page.show_dialog(ft.SnackBar(ft.Text(gasto)))
+            
+    def modificar_gasto(e):
+        def abrir_dialogo(e):
+            dialog = ft.AlertDialog(
+                title=ft.Text("Modificar gasto"),
+                content=ft.Text("¿Estás seguro de modificar este gasto?"),
+                txt_nombre = ft.TextField(label="Nuevo titulo", bgcolor="white"),
+                txt_gasto = ft.TextField(label="Nuevo gasto aproximado", bgcolor="white"),
+                txt_descripcion = ft.TextField(label="Nueva descripcion", bgcolor="white"),
+                txt_tipo = ft.Dropdown(
+                                    label="Tipo de gasto",
+                                    width=400,
+                                    filled=True,
+                                    bgcolor=ft.Colors.WHITE,
+                                    fill_color=ft.Colors.WHITE,
+                                    options=[
+                                        ft.dropdown.Option("Negocio"),
+                                        ft.dropdown.Option("Hogar"),
+                                        ft.dropdown.Option("Educativo"),
+                                        ft.dropdown.Option("Familiar"),
+                                        ft.dropdown.Option("Diario"),
+                                        ft.dropdown.Option("Ahorro"),
+                                        ft.dropdown.Option("Otro"),
+                                    ]
+                                ),
+                msg = ft.Text("", color=ft.Colors.RED),
+
+                actions=[
+                    ft.TextButton("Cancelar", on_click=lambda e: dialog.close()),
+                ]
+            )
+            page.dialog = dialog
+            dialog.open = True
+            page.update()
+            
     
     def cargar_gastos():
         lista_gastos.controls.clear()
         gastos=gasto_controller.obtener_gastos(usuario)
+        
     
         for g in gastos:
             lista_gastos.controls.append(
@@ -109,7 +147,7 @@ def GastosView(page, gasto_controller,controller):
                                 ft.Column([
                                     ft.Row(ft.ElevatedButton(content="Confirmar gasto", on_click= lambda e, gasto=g: confirmar_gasto(gasto), bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
                                     ,
-                                    ft.Row(ft.ElevatedButton(content="Modificar gasto", bgcolor=ft.Colors.BLUE_900, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
+                                    ft.Row(ft.ElevatedButton(content="Modificar gasto", bgcolor=ft.Colors.BLUE_900, on_click= lambda e, gasto=g: modificar_gasto(gasto), color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
                                     ,
                                     ft.Row(ft.ElevatedButton(content="Eliminar gasto", on_click= lambda e, gasto=g: eliminar_gasto(gasto) , bgcolor=ft.Colors.RED_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
                                     ,
