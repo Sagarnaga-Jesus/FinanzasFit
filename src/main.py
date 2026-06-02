@@ -5,7 +5,6 @@ from views.InicioView import InicioView
 from views.OlvidadoView import OlvidadoView
 from views.PerfilView import PerfilView,ModificarView
 from views.GastosView import GastosView
-from views.PresupuestoView import PresupuestoView
 from controllers.UserController import AuthController
 from controllers.DineroController import DineroController
 from controllers.GastoController import GastoController
@@ -40,8 +39,6 @@ def start(page: ft.Page):
             page.views.append(ModificarView(page, auth))
         elif page.route == "/gastos":
             page.views.append(GastosView(page, gasto,dinero))
-        elif page.route == "/presupuesto":
-            page.views.append(PresupuestoView(page, dinero))
         page.update()
 
     def view_pop(e):

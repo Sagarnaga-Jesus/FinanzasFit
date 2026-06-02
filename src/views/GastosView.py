@@ -6,8 +6,8 @@ def GastosView(page, gasto_controller,controller):
     usuario = user['id_usuario']       
     
     
-    dinero = ft.TextField(label="Ingreso de dinero", width=200)
-    dinero_quitar = ft.TextField(label="Quitar dinero", width=200)
+    dinero = ft.TextField(label="Ingreso de dinero", width=250, bgcolor=ft.Colors.BLACK_12, color=ft.Colors.GREEN_900)
+    dinero_quitar = ft.TextField(label="Quitar dinero", width=250, bgcolor=ft.Colors.BLACK_12, color=ft.Colors.GREEN_900)
     total_text = ft.Text(f"Total disponible: {controller.consultar_total(usuario)}", size=14, weight="bold")
     
     def actualizar_total(usuario):
@@ -61,12 +61,18 @@ def GastosView(page, gasto_controller,controller):
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=10
+                spacing=10,
+                
+                
             ),
-            width=260,
+            
+            width=300,
             height=100,
             padding=15,
-        )
+        ),
+        
+        shadow_color=ft.Colors.BLACK,
+        elevation=30,
     )
     
     #Aqui inicia gastos
@@ -109,6 +115,7 @@ def GastosView(page, gasto_controller,controller):
                         content = ft.Column([
                             ft.Text(g["titulo"], size=20, weight="bold"),
                             ft.Text(f"Descripcion: {g['descripcion']}", size=20),
+                            ft.Text(f"Tipo de gasto: {g['tipo_gasto']}", size=20),
                             ft.Text(f"Dinero a gastar: {g['gasto_aprox']}", size=20),
                                 ft.Column([
                                     ft.Row(ft.ElevatedButton(content="Confirmar gasto", on_click= lambda e, gasto=g: confirmar_gasto(gasto), bgcolor=ft.Colors.GREEN_400, color=ft.Colors.WHITE,),alignment=ft.MainAxisAlignment.CENTER,)
@@ -209,6 +216,26 @@ def GastosView(page, gasto_controller,controller):
             modi.open = False
             page.update()
 
+        def guardar_modificacion(g):
+            if not titulo_edit.value.strip() or not descripcion_edit.value.strip() or not tipo_edit.value:
+                page.show_dialog(ft.SnackBar(ft.Text("Todos los campos son obligatorios")))
+                return
+            
+            if not gasto_edit.value.strip():
+                dinero=0
+            else:
+                dinero = float(gasto_edit.value)
+            
+            success, message = gasto_controller.modificar_gasto(g["id_gasto"], dinero, titulo_edit.value, descripcion_edit.value, tipo_edit.value, usuario)
+            if success:
+                page.show_dialog(ft.SnackBar(ft.Text("Gasto modificado")))
+            else:
+                page.show_dialog(ft.SnackBar(ft.Text(message)))
+                
+            actualizar_total(user["id_usuario"])
+            cargar_gastos()
+            modi.open = False
+            page.update()
         modi = ft.AlertDialog(
                 title=ft.Text("Modificar gasto"),
                 content=ft.Column([
@@ -225,24 +252,6 @@ def GastosView(page, gasto_controller,controller):
         page.overlay.append(modi) 
         modi.open = True
         page.update()
-        
-    
-        def guardar_modificacion(g):
-            if not titulo_edit.value.strip() or not descripcion_edit.value.strip() or not tipo_edit.value:
-                page.show_dialog(ft.SnackBar(ft.Text("Todos los campos son obligatorios")))
-                return
-            
-            if not gasto_aprox.value.strip():
-                dinero=0
-            else:
-                dinero = float(gasto_aprox.value)
-            
-            gasto_controller.modificar_gasto(g["id_gasto"], dinero, titulo.value, descripcion.value)
-            page.show_dialog(ft.SnackBar(ft.Text("Gasto modificado")))
-            actualizar_total(user["id_usuario"])
-            cargar_gastos()
-            modi.open = False
-            page.update()
     
     return ft.View(
         route="/gastos",

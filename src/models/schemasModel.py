@@ -12,3 +12,10 @@ class UsuarioBaseShema(BaseModel):
 class UsuarioShema(UsuarioBaseShema):
     email: EmailStr
     password: str= Field(min_length=8)
+
+class GastoShema(BaseModel):
+    titulo: str = Field(min_length=3, max_length=100)
+    descripcion: Optional[str] = ""
+    tipo_gasto: str
+    gasto_aprox: float
+    

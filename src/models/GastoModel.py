@@ -79,9 +79,21 @@ class GastoModel:
         cursor.close()
         conn.close()
         
-    def modificar_gasto(self, id_gasto, gasto_aprox, titulo, descripcion):
+    def modificar_gasto(self, id_gasto, gasto_aprox, titulo, descripcion, id_usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
+        cursor.execute("SELECT gasto_aprox FROM gastos WHERE id_gasto = %s", (id_gasto,))
+        cantidad = cursor.fetchone()[0]
+        cantidad = float(cantidad)
+        gasto_aprox = float(gasto_aprox)
+        cursor.execute(
+                "UPDATE dinero SET presupuesto = presupuesto + %s WHERE id_usuario =%s",
+                (cantidad, id_usuario)
+        )
+        cursor.execute(
+            "UPDATE dinero SET presupuesto = presupuesto - %s WHERE id_usuario =%s",
+            (gasto_aprox, id_usuario)
+        )
         cursor.execute(
             "UPDATE gastos SET gasto_aprox = %s, titulo = %s, descripcion = %s WHERE id_gasto = %s",
             (gasto_aprox, titulo, descripcion, id_gasto)
@@ -89,4 +101,4 @@ class GastoModel:
         conn.commit()
         cursor.close()
         conn.close()
-        return "Gasto modificado"
+        return True, "Gasto modificado"
