@@ -64,7 +64,6 @@ def OlvidadoView(page, auth_controller):
             nueva.visible=True
             cambia_nueva.visible = True
             txt.visible = True
-            tarjeta2.open = True
             page.update()
         else:
             page.show_dialog(ft.SnackBar(ft.Text("Codigo incorrecto"),bgcolor="red"))
@@ -73,6 +72,7 @@ def OlvidadoView(page, auth_controller):
         listo,msg = auth_controller.cambiar(nueva.value,correo.value)
         if listo:
             page.show_dialog(ft.SnackBar(ft.Text(msg),bgcolor="green"))
+            tarjeta2.open = False
             page.go("/")
         else:
             page.show_dialog(ft.SnackBar(ft.Text(msg),bgcolor="red"))
