@@ -93,7 +93,7 @@ def OlvidadoView(page, auth_controller):
     txt = ft.Text("Ingrese su nueva contraseña", size=14, weight="bold", color="blue", visible=False)
     txt1 = ft.Text("Capture el codigo que recibio", size=14, weight="bold", color="blue")
     
-    tarjeta2 = ft.AlertDialog(
+    """tarjeta2 = ft.AlertDialog(
         title = ft.Text("Codigo enviado"),
         content = ft.Column([
                 txt1, 
@@ -105,9 +105,9 @@ def OlvidadoView(page, auth_controller):
         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=20)
     )
     page.overlay.append(tarjeta2)
-    page.update()
+    page.update()"""
     
-    """tarjeta = ft.Card(
+    tarjeta = ft.Card(
         visible = False, 
         content = ft.Column(
             [
@@ -117,7 +117,7 @@ def OlvidadoView(page, auth_controller):
                 txt, 
                 nueva, 
                 cambia_nueva
-                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=20))"""
+                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=20))
     
     return ft.View(
         route="/",
