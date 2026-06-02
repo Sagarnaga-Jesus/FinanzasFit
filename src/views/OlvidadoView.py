@@ -67,12 +67,16 @@ def OlvidadoView(page, auth_controller):
             page.update()
         else:
             page.show_dialog(ft.SnackBar(ft.Text("Codigo incorrecto"),bgcolor="red"))
+            
+    def cerrar(e):
+        tarjeta2.open = False
+        page.update()
     
     def cambiar(e):
         listo,msg = auth_controller.cambiar(nueva.value,correo.value)
         if listo:
             page.show_dialog(ft.SnackBar(ft.Text(msg),bgcolor="green"))
-            tarjeta2.open = False
+            cerrar(e)
             page.go("/")
         else:
             page.show_dialog(ft.SnackBar(ft.Text(msg),bgcolor="red"))
@@ -84,6 +88,8 @@ def OlvidadoView(page, auth_controller):
         
     def regresar(e):
         page.go("/")
+        
+
         
     reversa = ( ft.ElevatedButton("Regresar a login",color=ft.Colors.RED ,on_click=regresar))
     
