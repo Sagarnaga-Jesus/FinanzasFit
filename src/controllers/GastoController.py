@@ -26,6 +26,8 @@ class GastoController:
 
     def restar_gasto(self, id_gasto, gasto_aprox, id_usuario):
         restar_gasto = self.model.restar_gasto(id_gasto, gasto_aprox, id_usuario)
-        
+
+# No se si te sirva asi o me equivoque jaja        
     def modificar_gasto(self, id_gasto, cantidad, titulo, descripcion):
-        pass
+        modifi = self.model.modificar_gasto(id_gasto, cantidad, titulo, descripcion)
+        return modifi
