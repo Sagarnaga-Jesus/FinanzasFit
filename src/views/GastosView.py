@@ -109,9 +109,9 @@ def GastosView(page, gasto_controller,controller):
                     shadow_color=ft.Colors.BLACK_87,
                     elevation=20,
                     shape=ft.RoundedRectangleBorder(radius=12),
-                    
+                    expand=True,
                     content = ft.Container(
-                        padding=10,
+                        padding=8,
                         content = ft.Column([
                             ft.Text(g["titulo"], size=20, weight="bold"),
                             ft.Text(f"Descripcion: {g['descripcion']}", size=20),
