@@ -42,7 +42,7 @@ def OlvidadoView(page, auth_controller):
             )
             servidor.quit()
             page.show_dialog(ft.SnackBar(ft.Text("Codigo enviado con exito"),bgcolor="green"))
-            tarjeta2.visible = True
+            tarjeta.visible = True
             page.update()
             
         else:
@@ -57,7 +57,7 @@ def OlvidadoView(page, auth_controller):
             codigo = None
             expira = None
             txt_codigo.value = ""
-            tarjeta2.visible = False
+            tarjeta.visible = False
             page.show_dialog(ft.SnackBar(ft.Text("Codigo expirado"),bgcolor="red"))
             page.update()
         elif txt_codigo.value == str(codigo):
@@ -137,7 +137,7 @@ def OlvidadoView(page, auth_controller):
                     correo,
                     enviar,
                     reversa,
-                    tarjeta2
+                    tarjeta
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=20,
