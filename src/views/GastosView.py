@@ -104,14 +104,14 @@ def GastosView(page, gasto_controller,controller):
         for g in gastos:
             lista_gastos.controls.append(
                 ft.Card(
-                    width=400,
-                    height=300,
+                    width=500,
+                    height=500,
                     shadow_color=ft.Colors.BLACK_87,
                     elevation=20,
                     shape=ft.RoundedRectangleBorder(radius=12),
                     
                     content = ft.Container(
-                        padding=15,
+                        padding=10,
                         content = ft.Column([
                             ft.Text(g["titulo"], size=20, weight="bold"),
                             ft.Text(f"Descripcion: {g['descripcion']}", size=20),
@@ -236,6 +236,7 @@ def GastosView(page, gasto_controller,controller):
             cargar_gastos()
             modi.open = False
             page.update()
+        
         modi = ft.AlertDialog(
                 title=ft.Text("Modificar gasto"),
                 content=ft.Column([
